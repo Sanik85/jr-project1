@@ -16,8 +16,8 @@ public class BruteForce {
 
             for (int i = 1; i < Encoder.ALPHABETSIZE; i++) {
                 StringBuilder sb = new StringBuilder();
-                for (char aChar : chars) {
-                    sb.append(encoder.encodeCharacter(aChar, -i));
+                for (char c : chars) {
+                    sb.append(encoder.encodeCharacter(c, -i));
                 }
                 if (sb.toString().toLowerCase().contains(" is ")) {
                     System.out.println("key = " + i);
