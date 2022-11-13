@@ -1,11 +1,11 @@
-package com.company;
+package com.Sanik85.company.CaesarEncoder;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class FilePath {
+public class FileService {
     public String readTextFromFile(String filePath) {
         Path path = Paths.get(filePath);
         String fileText = null;
@@ -20,16 +20,20 @@ public class FilePath {
         }
         return fileText;
     }
-    public void writeTextToFile(String filePath, String fileText, String fileStatus) {
+    public void writeTextToFile(String filePath, String fileText) {
         try {
-            StringBuilder sb = new StringBuilder(filePath);
-            int index = filePath.lastIndexOf('.');
-            sb.insert(index, fileStatus);
-            Path outputPath = Paths.get(sb.toString());
+            Path outputPath = Paths.get(filePath);
             Files.writeString(outputPath, fileText);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    public String createNewFilePath (String filePath, String fileStatus){
+        StringBuilder sb = new StringBuilder(filePath);
+        int index = filePath.lastIndexOf('.');
+        sb.insert(index, fileStatus);
+        String outputPath = sb.toString();
+        return outputPath;
     }
 }
 

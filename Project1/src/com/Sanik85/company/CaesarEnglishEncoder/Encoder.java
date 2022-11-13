@@ -1,34 +1,33 @@
-package com.company;
+package com.Sanik85.company.CaesarEncoder;
 
-import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class Encoder {
-    public final char aUpper = 'A';
-    public final char zUpper = 'Z';
-    public final char aLower = 'a';
-    public final char zLower = 'z';
-    public static final int alphabetsCount = 26;
-    FilePath fp = new FilePath();
+    public static final char AUPPER = 'A';
+    public static final char ZUPPER = 'Z';
+    public static final char ALOWER = 'a';
+    public static final char ZLOWER = 'z';
+    public static final int ALPHABETSIZE = 26;
+    FileService fileService = new FileService();
 
     public void encodeFile(String filePath, int key) {
-        String fileText = fp.readTextFromFile(filePath);
-        String encodeText = encodeText(fileText, key);
-        fp.writeTextToFile(filePath, encodeText, "Encoded");
-        System.out.println("Encoding was successfully!");
+        String fileText = fileService.readTextFromFile(filePath);
+        String encodedText = encodeText(fileText, key);
+        String newFilePath = fileService.createNewFilePath(filePath, "(Encoded)");
+        fileService.writeTextToFile(newFilePath, encodedText);
+        System.out.println("Encoding was successfull!");
     }
 
     public void decodeFile(String filePath, int key) {
-        String fileText = fp.readTextFromFile(filePath);
+        String fileText = fileService.readTextFromFile(filePath);
         String encodeText = encodeText(fileText, -key);
-        fp.writeTextToFile(filePath, encodeText, "Decoded");
-        System.out.println("Decoding was successfully!");
+        String newFilePath = fileService.createNewFilePath(filePath, "(Decoded)");
+        fileService.writeTextToFile(newFilePath, encodeText);
+        System.out.println("Decoding was successfull!");
     }
 
-    public String encodeText(String fileText, int key) {
-        char[] character = fileText.toCharArray();
+    public String encodeText(String text, int key) {
+        char[] character = text.toCharArray();
         char[] encodeCharacter = new char[character.length];
         for (int i = 0; i < character.length; i++) {
             encodeCharacter[i] = encodeCharacter(character[i], key);
@@ -39,12 +38,12 @@ public class Encoder {
 
 
     public char encodeCharacter(char character, int key) {
-        int keyEncode = key % alphabetsCount;
+        int keyEncode = key % ALPHABETSIZE;
         char encodSymbol;
         if (isUpperCase(character)) {
-            encodSymbol = aChar(character, keyEncode, zUpper, aUpper);
+            encodSymbol = aChar(character, keyEncode, ZUPPER, AUPPER);
         } else if (isLowerCase(character)) {
-            encodSymbol = aChar(character, keyEncode, zLower, aLower);
+            encodSymbol = aChar(character, keyEncode, ZLOWER, ALOWER);
         } else encodSymbol = character;
         return encodSymbol;
     }
@@ -52,9 +51,9 @@ public class Encoder {
     public char aChar(int c, int key, int z, int a) {
         char character = (char) (c + key);
         if ((c + key) > z) {
-            character = (char) (c + key - alphabetsCount);
+            character = (char) (c + key - ALPHABETSIZE);
         } else if ((c + key) < a) {
-            character = (char) (c + key + alphabetsCount);
+            character = (char) (c + key + ALPHABETSIZE);
         }
         return character;
     }
@@ -80,13 +79,13 @@ public class Encoder {
 
 
     public boolean isUpperCase(char character) {
-        if (character >= aUpper && character <= zUpper) {
+        if (character >= AUPPER && character <= ZUPPER) {
             return true;
         } else return false;
     }
 
     public boolean isLowerCase(char character) {
-        if (character >= aLower && character <= zLower) {
+        if (character >= ALOWER && character <= ZLOWER) {
             return true;
         } else return false;
     }
