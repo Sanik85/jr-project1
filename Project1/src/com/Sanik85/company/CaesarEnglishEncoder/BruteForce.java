@@ -14,7 +14,7 @@ public class BruteForce {
             String fileText = Files.readString(path);
             char[] chars = fileText.toCharArray();
 
-            for (int i = 1; i < Encoder.ALPHABETSIZE; i++) {
+            for (int i = 0; i < Encoder.ALPHABETSIZE; i++) {
                 StringBuilder sb = new StringBuilder();
                 for (char c : chars) {
                     sb.append(encoder.encodeCharacter(c, -i));
@@ -25,8 +25,8 @@ public class BruteForce {
                     fileService.writeTextToFile(newFilePath, sb.toString());
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException e){
+            
         }
     }
 }
