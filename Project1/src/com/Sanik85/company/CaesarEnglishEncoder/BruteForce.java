@@ -26,7 +26,7 @@ public class BruteForce {
                 }
             }
         } catch (IOException e){
-            
+
         }
     }
 }
