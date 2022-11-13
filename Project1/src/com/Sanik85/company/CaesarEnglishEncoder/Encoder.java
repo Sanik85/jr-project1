@@ -38,14 +38,14 @@ public class Encoder {
         int keyEncode = key % ALPHABETSIZE;
         char encodedSymbol;
         if (isUpperCase(character)) {
-            encodedSymbol = encodeCharacter(character, keyEncode, ZUPPER, AUPPER);
+            encodedSymbol = encodeCharacter(character, keyEncode,AUPPER, ZUPPER);
         } else if (isLowerCase(character)) {
-            encodedSymbol = encodeCharacter(character, keyEncode, ZLOWER, ALOWER);
+            encodedSymbol = encodeCharacter(character, keyEncode, ALOWER, ZLOWER);
         } else encodedSymbol = character;
         return encodedSymbol;
     }
 
-    private char encodeCharacter(int c, int key, int z, int a) {
+    private char encodeCharacter(int c, int key, int a, int z) {
         char character = (char) (c + key);
         if ((c + key) > z) {
             character = (char) (c + key - ALPHABETSIZE);
