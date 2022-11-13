@@ -1,6 +1,4 @@
-package com.Sanik85.company.CaesarEncoder;
-
-import java.nio.file.Path;
+package com.Sanik85.company.CaesarEnglishEncoder;
 
 public class Encoder {
     public static final char AUPPER = 'A';
@@ -27,28 +25,27 @@ public class Encoder {
     }
 
     public String encodeText(String text, int key) {
-        char[] character = text.toCharArray();
-        char[] encodeCharacter = new char[character.length];
-        for (int i = 0; i < character.length; i++) {
-            encodeCharacter[i] = encodeCharacter(character[i], key);
+        char[] characters = text.toCharArray();
+        char[] encodeCharacters = new char[characters.length];
+        for (int i = 0; i < characters.length; i++) {
+            encodeCharacters[i] = encodeCharacter(characters[i], key);
         }
-        String encodeText = new String(encodeCharacter);
-        return encodeText;
+        return new String(encodeCharacters);
     }
 
 
     public char encodeCharacter(char character, int key) {
         int keyEncode = key % ALPHABETSIZE;
-        char encodSymbol;
+        char encodedSymbol;
         if (isUpperCase(character)) {
-            encodSymbol = aChar(character, keyEncode, ZUPPER, AUPPER);
+            encodedSymbol = encodeCharacter(character, keyEncode, ZUPPER, AUPPER);
         } else if (isLowerCase(character)) {
-            encodSymbol = aChar(character, keyEncode, ZLOWER, ALOWER);
-        } else encodSymbol = character;
-        return encodSymbol;
+            encodedSymbol = encodeCharacter(character, keyEncode, ZLOWER, ALOWER);
+        } else encodedSymbol = character;
+        return encodedSymbol;
     }
 
-    public char aChar(int c, int key, int z, int a) {
+    private char encodeCharacter(int c, int key, int z, int a) {
         char character = (char) (c + key);
         if ((c + key) > z) {
             character = (char) (c + key - ALPHABETSIZE);
@@ -58,33 +55,13 @@ public class Encoder {
         return character;
     }
 
-//    public char encodeCharacter2(char character, int key) {
-//        int keyEncode = key % alphabetsCount;
-//        char encodSymbol = (char) (character + keyEncode);
-//        if (isUpperCase(character)) {
-//            if ((character + keyEncode) > zUpper) {
-//                encodSymbol = (char) (character + keyEncode - alphabetsCount);
-//            } else if ((character + keyEncode) < aUpper) {
-//                encodSymbol = (char) (character + keyEncode + alphabetsCount);
-//            }
-//        } else if (isLowerCase(character)) {
-//            if ((character + keyEncode) > zLower) {
-//                encodSymbol = (char) (character + keyEncode - alphabetsCount);
-//            } else if ((character + keyEncode) < aLower) {
-//                encodSymbol = (char) (character + keyEncode + alphabetsCount);
-//            }
-//        } else encodSymbol = character;
-//        return encodSymbol;
-//    }
-
-
-    public boolean isUpperCase(char character) {
+    private boolean isUpperCase(char character) {
         if (character >= AUPPER && character <= ZUPPER) {
             return true;
         } else return false;
     }
 
-    public boolean isLowerCase(char character) {
+    private boolean isLowerCase(char character) {
         if (character >= ALOWER && character <= ZLOWER) {
             return true;
         } else return false;

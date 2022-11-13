@@ -1,4 +1,4 @@
-package com.Sanik85.company.CaesarEncoder;
+package com.Sanik85.company.CaesarEnglishEncoder;
 
 public class Main {
     public static void main(String[] args) {

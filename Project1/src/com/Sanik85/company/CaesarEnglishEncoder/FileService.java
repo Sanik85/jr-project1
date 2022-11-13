@@ -1,4 +1,4 @@
-package com.Sanik85.company.CaesarEncoder;
+package com.Sanik85.company.CaesarEnglishEncoder;
 
 import java.io.IOException;
 import java.nio.file.Files;
